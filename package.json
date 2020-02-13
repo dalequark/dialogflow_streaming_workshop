@@ -1,0 +1,22 @@
+{
+  "name": "dialogflow_streaming_audio",
+  "version": "1.0.0",
+  "description": "Stream audio in through the microphone and out through the speaker in node js",
+  "main": "DialogflowStream.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dale Markowitz",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@google-cloud/text-to-speech": "^2.2.0",
+    "dialogflow": "^1.1.2",
+    "install": "^0.13.0",
+    "keypress": "^0.2.1",
+    "node-record-lpcm16": "^1.0.1",
+    "npm": "^6.13.7",
+    "pump": "^3.0.0",
+    "speaker": "^0.5.1",
+    "uuid": "^3.4.0"
+  }
+}
