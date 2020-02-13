@@ -1,2 +1,2 @@
-export GOOGLE_APPLICATION_CREDENTIALS="./key.json"
-export PROJECT_ID="diypersonalassistant-okehiv"
+export GOOGLE_APPLICATION_CREDENTIALS="YOUR_KEY_FILE"
+export PROJECT_ID="YOUR_PROJECT_ID"

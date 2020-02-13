@@ -1,23 +1,33 @@
 const uuidv1 = require('uuid/v1');
 const DialogflowStream = require('./DialogflowStream');
-//const moment = require('moment');
-//const textToSpeech = require('@google-cloud/text-to-speech');
 const keypress = require('keypress');
+
+// Plays audioFile wav files through the speaker.
+// stream is a DialogflowStream object.
+async function playBuzzer(audioFile, stream) {
+    console.log("Buzz buzz buzz");
+    var contents = fs.readFileSync(audioFile);
+    await stream.playAudio(contents, 2);
+}
 
 async function handleResponse(dfStream, audio, queryResult) {
     // Once Dialogflow recognizes a user's intent, this
-    // function handles the response. 
-    // 
+    // function handles the response.
+    //
     // `dfSteam` is passed so you can play audio with it's .playAudio method
     // `audio` is an audio buffer returned by Dialogflow
     // `queryResult` is data returned by Dialogflow, see
     // https://cloud.google.com/dialogflow/docs/reference/rpc/google.cloud.dialogflow.v2#queryresult
-    
+
     const intent = queryResult.intent.displayName;
     const parameters = queryResult.parameters["fields"];
-    
+
     console.log(`Recognized intent ${intent}`);
-    console.log(`Parameters`, parameters);
+    if (parameters["duration"]) {
+        const duration = parameters["duration"]["structValue"]["fields"]["amount"]["numberValue"];
+        const unit = parameters["duration"]["structValue"]["fields"]["unit"]["stringValue"]; // s, min, h, day, yr
+        console.log(`Duration: ${duration} Unit: ${unit}`);
+    }
 
     // if (intent == YOUR_INTENT_HERE) {
     //     // do something
@@ -25,7 +35,7 @@ async function handleResponse(dfStream, audio, queryResult) {
     // else if (intent == YOUR_OTHER_INTENT) {
     //     // do something
     // }
-    
+
     await dfStream.playAudio(audio, 1);
 
     // The "end_conversation" flag lets us know whether we should expect
